@@ -1,6 +1,5 @@
-// category_widget.dart
-
 import 'package:flutter/material.dart';
+import 'package:cstore/screens/category_list.dart';  // Make sure to import the necessary screen
 
 class CategoryWidget extends StatelessWidget {
   // Dummy category data
@@ -33,29 +32,39 @@ class CategoryWidget extends StatelessWidget {
       ),
       itemCount: categories.length,
       itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border(
-              top: (index < 4) ? BorderSide.none : BorderSide(color: Colors.grey[300]!),
-              left: (index % 4 == 0) ? BorderSide.none : BorderSide(color: Colors.grey[300]!),
-              right: (index == categories.length - 1 || (index + 1) % 4 == 0)
-                  ? BorderSide.none
-                  : BorderSide(color: Colors.grey[300]!),
-              bottom: (index >= categories.length - 4)
-                  ? BorderSide.none
-                  : BorderSide(color: Colors.grey[300]!),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CategoryProductListPage(categoryName: categories[index]['name']),
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: (index < 4) ? BorderSide.none : BorderSide(color: Colors.grey[300]!),
+                left: (index % 4 == 0) ? BorderSide.none : BorderSide(color: Colors.grey[300]!),
+                right: (index == categories.length - 1 || (index + 1) % 4 == 0)
+                    ? BorderSide.none
+                    : BorderSide(color: Colors.grey[300]!),
+                bottom: (index >= categories.length - 4)
+                    ? BorderSide.none
+                    : BorderSide(color: Colors.grey[300]!),
+              ),
             ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(categories[index]['icon'], size: 40.0, color: Theme.of(context).primaryColor),
-                Text(
-                  categories[index]['name'],
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(categories[index]['icon'], size: 40.0, color: Theme.of(context).primaryColor),
+                  Text(
+                    categories[index]['name'],
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
             ),
           ),
         );

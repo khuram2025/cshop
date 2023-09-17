@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/login.dart';
 import '../screens/product_list_page.dart';
 
 
@@ -50,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
               // Navigate to the Settings page
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProductListPage()),
+                MaterialPageRoute(builder: (context) => ProductListPage()),  // Replace this with the Settings page once created
               );
             },
           ),
@@ -59,7 +60,11 @@ class CustomDrawer extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: ElevatedButton(
               onPressed: () {
-                // Handle login click
+                // Handle login click and navigate to LoginPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
               },
               child: Text('Login'),
             ),

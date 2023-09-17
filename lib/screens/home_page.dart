@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+
           CategoryWidget(),
           SizedBox(height: 10.0),
           ...List.generate(5, (index) => ProductCardBuilder()),
