@@ -1,74 +1,112 @@
-// product_card.dart
-
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
-  final String productName;
-  final String productPrice; // Consider renaming this to location or productLocation if it represents the product's location
-  final String imageUrl;
-  final String addedTime;
+import '../screens/product_detail.dart';
 
-  ProductCard({
-    required this.productName,
-    required this.productPrice, // Rename this if it represents the product's location
-    required this.imageUrl,
-    this.addedTime = '15 hours ago',
-  });
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(
-            imageUrl,
-            width: 130,
-            height: 100,
-            fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ProductDetailPage(
+            productTitle: 'Product Title',
+            productLocation: 'Product Location',
+            productDescription: 'This is the description of the product.',
+            // ... Other product details ...
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    productName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(productPrice), // Consider renaming if it represents the location
-                  Text(
-                    'Added: $addedTime',
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.sms),
-                        onPressed: () {
-                          // Handle SMS action
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.phone),
-                        onPressed: () {
-                          // Handle Call action
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.message),
-                        onPressed: () {
-                          // Handle WhatsApp action
-                        },
-                      ),
-                    ],
-                  )
-                ],
+        ));
+      },
+      child: Container(
+        height: 130,
+        width: MediaQuery.of(context).size.width > 700 ? 700 : MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+            color: Colors.black12,
+            width: 0.5,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: 130,
+              width: 120,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage("https://via.placeholder.com/130x100"), // Example network image
+                ),
               ),
             ),
-          ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,  // To ensure space between rows
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.verified, size: 16, color: Colors.green), // Verified icon
+                        SizedBox(width: 5),
+                        Text(
+                          'Product Title',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.location_on, size: 16, color: Colors.grey), // Location icon
+                        SizedBox(width: 5),
+                        Text('Product Location'),
+                      ],
+                    ),
+                    Text(
+                      'Added: 15 hours ago',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,  // To distribute space between icons
+                      children: [
+                        _iconWithText(Icons.message, 'SMS', Colors.grey),
+                        _iconWithText(Icons.call, 'Phone', Colors.green),
+                        _iconWithText(Icons.message, 'WhatsApp', Colors.blue),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _iconWithText(IconData icon, String label, Color color) {
+    return Container(
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey, width: 0.5),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: color),
+          SizedBox(width: 5),
+          Text(label, style: TextStyle(fontSize: 12, color: color)),
         ],
       ),
     );

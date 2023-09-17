@@ -19,11 +19,7 @@ class ProductList extends StatelessWidget {
             itemCount: 4,
             itemBuilder: (context, index) {
               return ProductCard(
-                productName: 'Product $index',
-                productPrice: '\$100',
-                imageUrl: 'https://via.placeholder.com/150', // Placeholder image URL
 
-                addedTime: '15 hours ago', // Example added time
               );
             },
           ),

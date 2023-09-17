@@ -1,12 +1,9 @@
-// home_page.dart
-
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/category_widget.dart';
-import '../widgets/product_list.dart'; // Import the product list widget
-
+import '../widgets/product_card.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -30,9 +27,25 @@ class HomePage extends StatelessWidget {
           ),
           CategoryWidget(),
           SizedBox(height: 10.0),
-          ProductList(),
+          ...List.generate(5, (index) => ProductCardBuilder()),
         ],
       ),
     );
   }
 }
+
+class ProductCardBuilder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ProductCard(),
+        SizedBox(height: 10.0),
+      ],
+    );
+  }
+}
+
+
+
+

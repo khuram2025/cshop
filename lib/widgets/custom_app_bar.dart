@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../screens/post_add.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,6 +16,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Center(child: Text('Channab')),
       actions: [
+        GestureDetector(
+          onTap: () {
+            // Navigate to PostAddPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PostAddPage()),
+            );
+          },
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 5), // To adjust height from top and bottom
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Center(
+              child: Text(
+                'Post ADD',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
         IconButton(
           icon: Icon(Icons.notifications),
           onPressed: () {
@@ -21,10 +49,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
         CircleAvatar(
-          backgroundImage: AssetImage('assets/user_pic.png'), // Placeholder image, replace with your own asset
+          backgroundImage: AssetImage('assets/user_pic.png'),
           radius: 20,
         ),
-        SizedBox(width: 10), // Spacing after profile pic
+        SizedBox(width: 10),
       ],
     );
   }
@@ -32,3 +60,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
+
