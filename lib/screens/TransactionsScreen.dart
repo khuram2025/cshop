@@ -25,23 +25,30 @@ class TransactionsContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Cards for Income & Expense
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InfoCard(
-                icon: Icons.arrow_upward,
-                title: 'Total Income',
-                amount: '568989.00',
-                percentageChange: '+40%',
+
+          // Changes: Wrapped Row inside Center and SingleChildScrollView
+          Center( // Added Center
+            child: SingleChildScrollView( // Added SingleChildScrollView
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InfoCard(
+                    icon: Icons.arrow_upward,
+                    title: 'Total Income',
+                    amount: '568989.00',
+                    percentageChange: '+40%',
+                  ),
+                  SizedBox(width: 8.0),
+                  InfoCard(
+                    icon: Icons.arrow_downward,
+                    title: 'Total Expense',
+                    amount: '200000.00',
+                    percentageChange: '-10%',
+                  ),
+                ],
               ),
-              SizedBox(width: 8.0),
-              InfoCard(
-                icon: Icons.arrow_downward,
-                title: 'Total Expense',
-                amount: '200000.00',
-                percentageChange: '-10%',
-              ),
-            ],
+            ),
           ),
 
           SizedBox(height: 16.0),
@@ -96,11 +103,11 @@ class TransactionsContent extends StatelessWidget {
               child: DataTable(
                 columnSpacing: isMobile ? 15.0 : 24.0,
                 columns: [
-                  DataColumn(label: Expanded(child: Text('Date'))),
-                  DataColumn(label: Expanded(child: Text('Title'))),
-                  DataColumn(label: Expanded(child: Text('Amount'))),
-                  DataColumn(label: Expanded(child: Text('Category'))),
-                  DataColumn(label: Expanded(child: Text('Action'))),
+                  DataColumn(label: Text('Date')), // Removed Expanded from labels
+                  DataColumn(label: Text('Title')), // Removed Expanded from labels
+                  DataColumn(label: Text('Amount')), // Removed Expanded from labels
+                  DataColumn(label: Text('Category')), // Removed Expanded from labels
+                  DataColumn(label: Text('Action')), // Removed Expanded from labels
                 ],
                 rows: List.generate(10, (index) {
                   return DataRow(cells: [
@@ -140,4 +147,3 @@ class TransactionsContent extends StatelessWidget {
     );
   }
 }
-

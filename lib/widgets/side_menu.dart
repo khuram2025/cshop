@@ -1,7 +1,9 @@
+import 'package:cstore/screens/AnimalListPage.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/DashboardScreen.dart';
 import '../screens/Page1.dart';
+import '../screens/ProductListScreen.dart';
 import '../screens/TransactionsScreen.dart';  // Assuming Page1 is your dashboard, modify as necessary.
 
 class SideMenu extends StatelessWidget {
@@ -35,16 +37,19 @@ class SideMenu extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text('Products'),
-            onTap: () {
-              // Navigation for Products page
-            },
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => ProductListPage()),
+            ),
           ),
+
           ListTile(
             leading: Icon(Icons.monetization_on),
-            title: Text('Finances'),
-            onTap: () {
-              // Navigation for Finances page
-            },
+            title: Text('Animal List'),
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => AnimalListPage()),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.people),
